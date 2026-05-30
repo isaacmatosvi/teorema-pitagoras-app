@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teorema de Pitágoras | Aula Interactiva</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="Aplicación interactiva del Teorema de Pitágoras">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Aula interactiva</p>
+            <h1>Teorema de Pitágoras</h1>
+          </div>
+          <div class="progress-pill" aria-live="polite">
+            <span id="progressLabel">Nivel 1</span>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progressBar"></span>
+            </div>
+          </div>
+        </header>
+
+        <section class="hero-grid">
+          <article class="triangle-lab" aria-label="Laboratorio de triángulos">
+            <div class="lab-header">
+              <div>
+                <h2>Construye tu triángulo</h2>
+                <p>Ingresa tres lados. La app identifica la hipotenusa y comprueba si forman un triángulo rectángulo.</p>
+              </div>
+              <button id="randomBtn" type="button">Ejemplo</button>
+            </div>
+
+            <div class="input-grid">
+              <label>
+                Lado a
+                <input id="sideA" type="number" inputmode="decimal" min="0" step="0.1" value="3" />
+              </label>
+              <label>
+                Lado b
+                <input id="sideB" type="number" inputmode="decimal" min="0" step="0.1" value="4" />
+              </label>
+              <label>
+                Lado c
+                <input id="sideC" type="number" inputmode="decimal" min="0" step="0.1" value="5" />
+              </label>
+            </div>
+
+            <div class="canvas-wrap">
+              <svg id="triangleSvg" viewBox="0 0 520 360" role="img" aria-labelledby="triangleTitle triangleDesc">
+                <title id="triangleTitle">Triángulo interactivo</title>
+                <desc id="triangleDesc">Representación animada del triángulo con cuadrados sobre sus lados.</desc>
+                <defs>
+                  <linearGradient id="squareGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+                    <stop offset="0%" stop-color="#2aa8ff" />
+                    <stop offset="100%" stop-color="#15c184" />
+                  </linearGradient>
+                </defs>
+                <polygon class="area-square square-a" points="108,250 108,154 204,154 204,250"></polygon>
+                <polygon class="area-square square-b" points="204,250 364,250 364,90 204,90"></polygon>
+                <polygon class="area-square square-c" points="108,250 364,90 524,346 268,506"></polygon>
+                <polygon id="triangleShape" points="108,250 364,250 364,90"></polygon>
+                <circle cx="108" cy="250" r="5"></circle>
+                <circle cx="364" cy="250" r="5"></circle>
+                <circle cx="364" cy="90" r="5"></circle>
+                <path class="right-angle" d="M 364 226 L 340 226 L 340 250" />
+                <text id="labelA" x="226" y="272">a = 3</text>
+                <text id="labelB" x="376" y="174">b = 4</text>
+                <text id="labelC" x="220" y="158">c = 5</text>
+              </svg>
+            </div>
+          </article>
+
+          <aside class="result-panel" aria-live="polite">
+            <div id="statusBadge" class="status-badge is-right">Triángulo rectángulo</div>
+            <h2 id="resultTitle">3² + 4² = 5²</h2>
+            <p id="resultText">9 + 16 = 25. Sí cumple el Teorema de Pitágoras.</p>
+            <div class="formula-box">
+              <span>cateto² + cateto² = hipotenusa²</span>
+              <strong id="formulaLine">3² + 4² = 5²</strong>
+            </div>
+            <div class="ai-box">
+              <span>Tutor IA</span>
+              <p id="aiFeedback">Excelente punto de partida: este es el ejemplo clásico. Observa que el lado mayor es la hipotenusa.</p>
+            </div>
+          </aside>
+        </section>
+
+        <section class="learning-panel">
+          <div class="tabs" role="tablist" aria-label="Secciones de aprendizaje">
+            <button class="tab is-active" type="button" data-tab="learn" role="tab" aria-selected="true">Aprender</button>
+            <button class="tab" type="button" data-tab="practice" role="tab" aria-selected="false">Ejercicios</button>
+            <button class="tab" type="button" data-tab="steps" role="tab" aria-selected="false">Paso a paso</button>
+            <button class="tab" type="button" data-tab="view3d" role="tab" aria-selected="false">Vista 3D</button>
+          </div>
+
+          <section id="learn" class="tab-panel is-active" role="tabpanel">
+            <div class="lesson-grid">
+              <article>
+                <h3>La idea esencial</h3>
+                <p>En un triángulo rectángulo hay un ángulo de 90°. Los lados que forman ese ángulo se llaman catetos. El lado más largo, frente al ángulo recto, se llama hipotenusa.</p>
+              </article>
+              <article>
+                <h3>La regla</h3>
+                <p>Si elevas al cuadrado los dos catetos y sumas esas áreas, obtienes el cuadrado de la hipotenusa: <strong>a² + b² = c²</strong>.</p>
+              </article>
+              <article>
+                <h3>Cómo usarla</h3>
+                <p>Ordena los lados de menor a mayor. Prueba si los dos menores al cuadrado suman lo mismo que el mayor al cuadrado.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="practice" class="tab-panel" role="tabpanel">
+            <div class="practice-layout">
+              <div>
+                <h3 id="exerciseTitle">Ejercicio 1</h3>
+                <p id="exercisePrompt">Un triángulo tiene lados 6, 8 y 10. ¿Es rectángulo?</p>
+                <div class="choice-row">
+                  <button class="choice" type="button" data-answer="yes">Sí</button>
+                  <button class="choice" type="button" data-answer="no">No</button>
+                </div>
+                <div id="exerciseFeedback" class="exercise-feedback" role="status">Elige una respuesta para recibir retroalimentación.</div>
+              </div>
+              <button id="nextExerciseBtn" type="button">Siguiente ejercicio</button>
+            </div>
+          </section>
+
+          <section id="steps" class="tab-panel" role="tabpanel">
+            <ol id="stepList" class="step-list"></ol>
+          </section>
+
+          <section id="view3d" class="tab-panel" role="tabpanel">
+            <div class="three-layout">
+              <div class="three-stage">
+                <div id="threeScene" class="three-scene" aria-label="Triángulo en 3D interactivo"></div>
+                <div id="threeLoading" class="three-loading">Cargando vista 3D...</div>
+              </div>
+              <aside class="three-guide">
+                <h3>Explora el triángulo</h3>
+                <p>Arrastra para rotar, acerca con el gesto de zoom y observa cómo los cuadrados de área se apoyan sobre cada lado.</p>
+                <div class="three-actions">
+                  <button id="reset3dBtn" type="button">Recentrar</button>
+                  <button id="toggleSpinBtn" type="button" aria-pressed="true">Pausar giro</button>
+                </div>
+                <p id="threeHint" class="three-hint">La vista 3D usa los lados actuales: 3, 4 y 5.</p>
+              </aside>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js?v=4"></script>
+    <script type="module" src="pythagoras-3d.js?v=3"></script>
+  </body>
+</html>
